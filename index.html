@@ -13,18 +13,24 @@
         }
 
         :root {
-            --bg-deep: #f5f0ff;        /* 浅紫白背景 */
+            --bg-deep: #f5f0ff;        /* 浅紫白背景（备用） */
             --surface: rgba(255, 255, 255, 0.75);
             --card-bg: rgba(255, 255, 255, 0.85);
             --glow: #c084fc;           /* 淡紫光效 */
             --primary: #8b5cf6;        /* 紫罗兰主色 */
             --primary-dark: #7c3aed;
             --text-main: #1e1b2e;
-            --text-muted: #5b5280;
+            /* --text-muted: #5b5280; */
             --border-light: rgba(139, 92, 246, 0.2);
             --shadow-sm: 0 8px 20px rgba(139, 92, 246, 0.08);
             --shadow-md: 0 12px 28px rgba(139, 92, 246, 0.12);
             --radius-card: 28px;
+            --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+            --primary-purple: #4a148c;
+            --text-muted: #6a1b9a;
+            --glass-bg: rgba(255, 255, 255, 0.2); 
+            --glass-border: rgba(255, 255, 255, 0.2);
             --font-mono: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
         }
 
@@ -35,41 +41,15 @@
             line-height: 1.5;
             min-height: 100vh;
             position: relative;
-        }
-
-        /* 极客网格背景 + 柔和光晕 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(var(--border-light) 1px, transparent 1px),
-                linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: -2;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 70% 20%, rgba(196, 132, 252, 0.08), transparent 70%);
-            pointer-events: none;
-            z-index: -1;
+            transition: opacity 0.8s ease;
+            transition: background-image 0.8s ease-in-out;
         }
 
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 2rem 1.5rem;
-            backdrop-filter: blur(2px);
+            /* backdrop-filter: blur(2px); */
         }
 
         /* 导航 - 毛玻璃质感 */
@@ -102,12 +82,12 @@
             margin-bottom: 3.5rem;
         }
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             object-fit: cover;
             box-shadow: var(--shadow-md);
-            border: 2px solid rgba(255,255,255,0.8);
+            border: 4px solid rgba(255,255,255,0.5);
             margin-bottom: 1.2rem;
             transition: transform 0.2s ease;
         }
@@ -115,27 +95,22 @@
             transform: scale(1.02);
         }
         .hero h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #6d28d9, #a855f7);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.5px;
-            margin-bottom: 0.5rem;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            letter-spacing: -1px;
         }
         .hero .bio {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 550px;
-            margin: 0 auto;
-            font-family: var(--font-mono);
-            background: rgba(255,255,255,0.4);
-            backdrop-filter: blur(4px);
             display: inline-block;
-            padding: 0.3rem 1rem;
-            border-radius: 40px;
-            border: 1px solid var(--border-light);
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 6px 20px;
+            border-radius: 50px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(5px); /* 给简介加一点轻微模糊增加易读性 */
         }
 
         /* 代码点缀 (极客小元素) */
@@ -204,40 +179,44 @@
             margin-top: 1rem;
         }
         .project-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            border-radius: var(--radius-card);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            transition: all 0.25s ease;
+            background: var(--glass-bg); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 0.1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
             text-decoration: none;
-            color: inherit;
-            display: block;
-            border: 1px solid var(--border-light);
+            color: white;
+            transition: all 0.3s ease;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-md);
-            border-color: var(--glow);
-            background: rgba(255, 255, 255, 0.92);
-        }
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-8px);
+            border-color: white;
+         }
+    
         .project-card h3 {
-            font-size: 1.35rem;
-            margin-bottom: 0.6rem;
-            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
+
         .project-card p {
-            color: var(--text-muted);
             font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
         }
-        .project-tag {
-            display: inline-block;
-            margin-top: 1.2rem;
-            font-size: 0.8rem;
-            color: var(--primary);
-            font-weight: 500;
+
+        .tag {
             font-family: var(--font-mono);
-            border-bottom: 1px dashed var(--primary);
+            font-size: 0.75rem;
+            color: #f3e5f5;
+            background: rgba(106, 27, 154, 0.3);
+            padding: 4px 10px;
+            border-radius: 6px;
         }
 
         /* 社交链接区 极简科技风 */
@@ -271,7 +250,7 @@
             box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
         }
 
-        footer {
+        /* footer {
             text-align: center;
             margin-top: 3.5rem;
             font-size: 0.75rem;
@@ -280,6 +259,15 @@
             border-top: 1px solid var(--border-light);
             padding-top: 2rem;
             opacity: 0.7;
+        } */
+
+        .footer {
+            margin-top:100px;
+            font-size: 0.8rem;
+            font-family: var(--font-mono);
+            color: #4a148c;
+            opacity: 0.7;
+            text-align: center;
         }
 
         /* 响应式小调整 */
@@ -303,69 +291,274 @@
 <div class="container">
     <!-- 极客导航 -->
     <div class="nav">
-        <a href="#">~/home</a>
-        <a href="#">~/projects</a>
-        <a href="#">~/about</a>
-        <a href="#">~/contact</a>
+        <a href="#">~/Home</a>
+        <a href="#">~/Archives</a>
+        <a href="#">~/About</a>
+        <a href="#">~/Contact</a>
     </div>
 
     <!-- 头像 & 简介 -->
     <div class="hero">
-        <!-- 替换图片地址为你自己的，或者用免费占位图 -->
-        <img class="avatar" src="https://picsum.photos/id/169/200/200" alt="avatar" onerror="this.src='https://via.placeholder.com/120'">
-        <div class="code-badge">$&gt;  echo "hello, world!"</div>
-        <h1>林一 · 极客学徒</h1>
+        <!-- 替换图片地址为你自己的 -->
+        <img class="avatar" src="./profile.png" alt="avatar" onerror="this.src='https://via.placeholder.com/120'">
+        <div class="code-badge">$&gt; Here is a humble abode of a diligent little bee.</div>
+        <h1>👋 Hi, welcome!</h1>
         <div class="bio">
-            &lt;前端酿造中 / 设计优雅的代码片段&gt;
+            &lt;Beauty in things exists in the mind which contemplates them...&gt;
         </div>
     </div>
 
-    <!-- 技能区域：浅紫标签等宽字体 -->
+    <!-- 技能区域 -->
     <div class="section-title">
-        <span></span> 技能栈 <span></span>
+        <span></span> Tags <span></span>
     </div>
     <div class="skills">
-        <span class="skill-tag">HTML5 / CSS3</span>
-        <span class="skill-tag">Flex / Grid</span>
-        <span class="skill-tag">JavaScript (ES6+)</span>
-        <span class="skill-tag">React (初学)</span>
-        <span class="skill-tag">Git & GitHub</span>
-        <span class="skill-tag">Figma 基础</span>
+        <span class="skill-tag">SJTU</span>
+        <span class="skill-tag">Notes</span>
+        <span class="skill-tag">Writing</span>
+        <span class="skill-tag">Travel</span>
+        <span class="skill-tag">Reading</span>
+        <span class="skill-tag">IELTS</span>
     </div>
 
-    <!-- 作品 / 项目区域 -->
+    <!-- 作品区域 -->
     <div class="section-title">
-        <span></span> 精选项目 <span></span>
+        <span></span> Categories <span></span>
     </div>
+
     <div class="projects-grid">
         <a href="README.md" class="project-card">
-            <h3>⚡ 极客时钟</h3>
-            <p>动态数字时钟 + 浅紫主题，使用原生JS与CSS变量实时切换。</p>
-            <span class="project-tag">[ 查看源码 ] →</span>
+            <h3>📖 About </h3>
+            <p>Click for more about this site and my friend's link.</p>
+            <span class="tag">#README</span>
         </a>
-        <a href="#" class="project-card">
-            <h3>🪐 星尘笔记</h3>
-            <p>极简个人笔记页，支持Markdown风格渲染，本地存储。</p>
-            <span class="project-tag">[ 预览 ] →</span>
+
+        <a href="notes/thought-01.html" class="project-card">
+            <h3>🪐 Deep Thinking</h3>
+            <p>Life and philosophy.</p>
+            <span class="tag">#THOUGHTS</span>
         </a>
-        <a href="#" class="project-card">
-            <h3>🎨 紫色设计系统</h3>
-            <p>组件库探索：按钮、卡片、表单的毛玻璃方案。</p>
-            <span class="project-tag">[ 探索 ] →</span>
+        <!-- 🧪 -->
+        <a href="notes/study-01.html" class="project-card">
+            <h3>✏️ Study Notes</h3>
+            <p>Knowledge notes.</p>
+            <span class="tag">#LEARNING</span>
         </a>
     </div>
 
     <!-- 社交 / 联系 -->
     <div class="socials">
-        <a href="#" class="social-link">🐙 GitHub</a>
-        <a href="#" class="social-link">💬 Twitter/X</a>
-        <a href="#" class="social-link">📧 邮件联系</a>
-        <a href="#" class="social-link">🖋️ 博客</a>
+        <!-- <a href="#" class="social-link">🐙 GitHub</a> -->
+        <!-- <a href="#" class="social-link">💬 Twitter/X</a> -->
+        <!-- <a href="#" class="social-link">📧 邮件联系</a> -->
+        <!-- <a href="#" class="social-link">🖋️ 博客</a> -->
     </div>
 
-    <footer>
-        ~/ $ 保持好奇，持续迭代 · 最后构建于 2026 浅紫极客版
-    </footer>
+    <!-- <footer>
+        ~/ $ 保持好奇，持续迭代 · 背景每日更新
+    </footer> -->
+
+    <div class="footer">
+            Established in 2026/4/5 <br>BG source:<a href="https://bing.ioliu.cn/" >Bing Daily Image</a>
+    </div>
 </div>
+
+<!-- 在 <body> 开头添加一个淡入层 -->
+<div id="page-fade" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#f5f0ff; z-index:9999; pointer-events:none; transition:opacity 0.6s ease; opacity:1;"></div>
+
+<script>
+(function() {
+    // ========== 配置区域 ==========
+    const CONFIG = {
+        API: 'https://bing.biturl.top/?resolution=1920&format=json',
+        MAX_INDEX: 5,
+        MAX_RETRIES: 6,
+        RETRY_DELAY: 200,
+        PRELOAD: true
+    };
+    
+    const mktList = ['zh-CN', 'en-US', 'ja-JP', 'en-AU', 'de-DE', 'fr-FR', 'it-IT', 'es-ES', 'pt-BR'];
+    
+    const forbiddenWords = [
+        '鸡', '公鸡', '母鸡', '小鸡', '雏', '禽', '琴鸡', '松鸡', '雉', '鹑', '鸟',
+        'chicken', 'rooster', 'hen', 'chick', 'poultry', 'gallus', 'grouse', 'pheasant', 'ptarmigan', 'partridge', 'fowl',
+        'huhn', 'hahn', 'henne', 'birkh', 'geflügel', 'fasan', 'moorschneehuhn',
+        'poulet', 'coq', 'poule', 'tétras', 'faisan', 'gélinotte', 'perdrix',
+        'tetraz', 'frango', 'galo', 'galinha', 'pinto', 'ave', 'faisão', 'perdiz', 'pollo', 'gallo',
+        'ニワトリ', '鶏', 'キジ', 'ライチョウ'
+    ];
+    
+    // ========== 状态变量 ==========
+    let retryCount = 0;
+    let lastUrl = '';
+    let isLoading = false;
+    let isBackgroundSet = false;  // 🔑 关键：标记背景是否已成功设置
+    
+    // ========== 淡入淡出控制 ==========
+    const fadeOverlay = document.getElementById('page-fade');
+    
+    function hideOverlay() {
+        if (!fadeOverlay) return;
+        // 只有背景真正设置成功后才淡出
+        if (!isBackgroundSet) return;
+        fadeOverlay.style.transition = 'opacity 0.6s ease';
+        fadeOverlay.style.opacity = '0';
+        // 动画结束后移除遮罩层（可选，保留也行）
+        setTimeout(() => {
+            if (fadeOverlay && fadeOverlay.style.opacity === '0') {
+                fadeOverlay.style.display = 'none';
+            }
+        }, 600);
+    }
+    
+    function showOverlay() {
+        if (!fadeOverlay) return;
+        fadeOverlay.style.display = 'block';
+        fadeOverlay.style.transition = 'none';
+        fadeOverlay.style.opacity = '1';
+        // 强制重绘，确保 transition 生效
+        fadeOverlay.offsetHeight;
+        fadeOverlay.style.transition = 'opacity 0.6s ease';
+    }
+    
+    // ========== 工具函数 ==========
+    function isForbidden(copyright) {
+        const lowerCopyright = copyright.toLowerCase();
+        return forbiddenWords.some(word => lowerCopyright.includes(word.toLowerCase()));
+    }
+    
+    function getRandomParams() {
+        return {
+            index: Math.floor(Math.random() * CONFIG.MAX_INDEX),
+            mkt: mktList[Math.floor(Math.random() * mktList.length)]
+        };
+    }
+    
+    function buildApiUrl(params) {
+        return `${CONFIG.API}&index=${params.index}&mkt=${params.mkt}`;
+    }
+    
+    function useFallback() {
+        // 🔑 保底背景也视为"背景已设置"
+        document.body.style.background = "linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%)";
+        document.body.style.backgroundSize = 'cover';
+        document.body.style.backgroundAttachment = 'fixed';
+        console.warn('⚠️ 使用保底背景');
+        
+        // 标记背景已设置，然后淡出遮罩
+        isBackgroundSet = true;
+        hideOverlay();
+    }
+    
+    // ========== 核心功能 ==========
+    function applyBackground(data, mkt) {
+        if (!data || !data.url) {
+            if (retryCount < CONFIG.MAX_RETRIES) {
+                retryCount++;
+                setTimeout(() => fetchBingWallpaper(), CONFIG.RETRY_DELAY);
+            } else {
+                useFallback();
+            }
+            return;
+        }
+        
+        const img = new Image();
+        img.onload = () => {
+            // 设置新背景
+            document.body.style.backgroundImage = `url('${data.url}')`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundAttachment = 'fixed';
+            
+            console.log(`✅ 背景加载成功 | 地区: ${mkt} | ${data.copyright}`);
+            
+            // 🔑 标记背景已设置，然后淡出遮罩
+            isBackgroundSet = true;
+            hideOverlay();
+            
+            // 预加载下一张
+            if (CONFIG.PRELOAD) {
+                setTimeout(() => preloadNextImage(), 3000);
+            }
+        };
+        
+        img.onerror = () => {
+            console.warn('图片加载失败，重试');
+            if (retryCount < CONFIG.MAX_RETRIES) {
+                retryCount++;
+                setTimeout(() => fetchBingWallpaper(), CONFIG.RETRY_DELAY);
+            } else {
+                useFallback();
+            }
+        };
+        
+        img.src = data.url;
+    }
+    
+    function fetchBingWallpaper() {
+        if (isLoading) return;
+        isLoading = true;
+        
+        const params = getRandomParams();
+        const apiUrl = buildApiUrl(params);
+        
+        fetch(apiUrl)
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then(data => {
+                isLoading = false;
+                
+                if (!data || !data.url) throw new Error('无效响应');
+                
+                // 检查是否禽类 或 重复图片
+                if (isForbidden(data.copyright) || data.url === lastUrl) {
+                    console.warn(`🚫 拦截 (${params.mkt}): ${data.copyright}`);
+                    if (retryCount < CONFIG.MAX_RETRIES) {
+                        retryCount++;
+                        setTimeout(() => fetchBingWallpaper(), CONFIG.RETRY_DELAY);
+                    } else {
+                        useFallback();
+                    }
+                    return;
+                }
+                
+                retryCount = 0;
+                lastUrl = data.url;
+                applyBackground(data, params.mkt);
+            })
+            .catch(err => {
+                isLoading = false;
+                console.error('API请求失败:', err);
+                if (retryCount < CONFIG.MAX_RETRIES) {
+                    retryCount++;
+                    setTimeout(() => fetchBingWallpaper(), CONFIG.RETRY_DELAY);
+                } else {
+                    useFallback();
+                }
+            });
+    }
+    
+    function preloadNextImage() {
+        const params = getRandomParams();
+        const apiUrl = buildApiUrl(params);
+        
+        fetch(apiUrl)
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.url && !isForbidden(data.copyright) && data.url !== lastUrl) {
+                    const img = new Image();
+                    img.src = data.url;
+                    console.log('📦 预加载完成');
+                }
+            })
+            .catch(() => {});
+    }
+    
+    // ========== 启动 ==========
+    fetchBingWallpaper();
+})();
+</script>
 </body>
 </html>
